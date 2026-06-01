@@ -1,0 +1,26 @@
+services:
+  odoo-online-mcp-gateway:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8787:8787"
+    environment:
+      # Odoo Online connection
+      - ODOO_BASE_URL=${ODOO_BASE_URL}
+      - ODOO_DB=${ODOO_DB}
+      - ODOO_LOGIN=${ODOO_LOGIN}
+      - ODOO_PASSWORD=${ODOO_PASSWORD}
+
+      # Gateway policy/auth
+      - GATEWAY_CONFIG=/app/config.json
+      - GATEWAY_TOKEN_1=${GATEWAY_TOKEN_1}
+    volumes:
+      - ./config.example.json:/app/config.json:ro
+      - ./audit.log.jsonl:/app/audit.log.jsonl
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8787/healthz', timeout=2).read()"]
+      interval: 10s
+      timeout: 3s
+      retries: 5

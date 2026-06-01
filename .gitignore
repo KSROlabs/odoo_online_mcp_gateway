@@ -1,0 +1,54 @@
+# Secrets and local config (NEVER commit these)
+.env
+.env.*
+config.json
+audit.log
+audit.log.jsonl
+*.jsonl
+*.log
+
+# Packaging artifacts
+*.tar.gz
+*.tar
+*.zip
+release/
+dist/
+build/
+*.egg-info/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini

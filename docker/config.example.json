@@ -1,0 +1,35 @@
+{
+  "tokens": [
+    {
+      "name": "org-default",
+      "token_env": "GATEWAY_TOKEN_1",
+      "policy": {
+        "allow_models": [
+          "stock.picking",
+          "sale.order",
+          "res.partner",
+          "account.move",
+          "crm.lead"
+        ],
+        "allow_ops": ["read", "aggregate"],
+        "model_rules": {
+          "account.move": {
+            "domain": [["move_type", "in", ["out_invoice", "out_refund"]]]
+          }
+        }
+      }
+    }
+  ],
+  "limits": {
+    "max_payload_kb": 512,
+    "rate_limit_per_minute": 120
+  },
+  "audit": {
+    "enabled": true,
+    "log_path": "audit.log.jsonl",
+    "log_payloads": false
+  },
+  "security": {
+    "hide_internal_errors": true
+  }
+}

@@ -1,0 +1,19 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Copy gateway code
+COPY odoo_online_mcp_gateway /app/odoo_online_mcp_gateway
+
+# Bake a read-only policy config into the image.
+# Token value is provided at runtime via env var referenced by token_env (default: GATEWAY_TOKEN_1).
+COPY docker/config.example.json /app/config.json
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    GATEWAY_CONFIG=/app/config.json \
+    GATEWAY_LOCK_CONFIG=1 \
+    GATEWAY_HIDE_INTERNAL_ERRORS=1
+
+# Default to stdio mode (Cursor/Claude MCP).
+CMD ["python", "-m", "odoo_online_mcp_gateway", "stdio"]

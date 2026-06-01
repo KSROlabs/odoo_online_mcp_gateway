@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "odoo-online-mcp-gateway"
+version = "0.1.1"
+description = "External MCP gateway for Odoo Online (SaaS) via XML-RPC - Connect AI tools without server modules"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "KSRO Labs", email = "info@ksrolabs.com"}
+]
+keywords = ["odoo", "odoo-online", "odoo-saas", "mcp", "model-context-protocol", "ai", "xml-rpc", "claude", "cursor", "llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Office/Business",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "flake8>=6.0",
+    "mypy>=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/KSROlabs/odoo_online_mcp_gateway"
+Documentation = "https://github.com/KSROlabs/odoo_online_mcp_gateway#readme"
+Repository = "https://github.com/KSROlabs/odoo_online_mcp_gateway.git"
+"Bug Tracker" = "https://github.com/KSROlabs/odoo_online_mcp_gateway/issues"
+
+[project.scripts]
+odoo-online-mcp-gateway = "odoo_online_mcp_gateway.cli:main"
+
+[tool.setuptools]
+packages = ["odoo_online_mcp_gateway"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-ra"
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
